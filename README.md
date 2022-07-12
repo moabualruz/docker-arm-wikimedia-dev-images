@@ -1,5 +1,6 @@
 # Wikimedia dev debian images with Dockerfiles
-
+This tool and script helps to create arm/(Mac M1 compatible) images for the developer environment on the Wikimedia framework. Which helps with performance and debugging on arm machines.
+ 
 ## How to use Arm Docker images in your project
 
 - Run the following to create local images
