@@ -23,7 +23,7 @@ exec_prefix = $(prefix)
 libdir = ${exec_prefix}/lib
 prefix = /usr
 phplibdir = /docker/php-xhprof-extension/modules
-phpincludedir = /usr/include/php/20170718
+phpincludedir = /usr/include/php/20190902
 CC = cc
 CFLAGS = -g -O2
 CFLAGS_CLEAN = $(CFLAGS)
@@ -32,11 +32,11 @@ CPPFLAGS = -DHAVE_CONFIG_H
 CXX =
 CXXFLAGS =
 CXXFLAGS_CLEAN = $(CXXFLAGS)
-EXTENSION_DIR = /usr/lib/php/20170718
-PHP_EXECUTABLE = /usr/bin/php7.2
+EXTENSION_DIR = /usr/lib/php/20190902
+PHP_EXECUTABLE = /usr/bin/php7.4
 EXTRA_LDFLAGS =
 EXTRA_LIBS =
-INCLUDES = -I/usr/include/php/20170718 -I/usr/include/php/20170718/main -I/usr/include/php/20170718/TSRM -I/usr/include/php/20170718/Zend -I/usr/include/php/20170718/ext -I/usr/include/php/20170718/ext/date/lib
+INCLUDES = -I/usr/include/php/20190902 -I/usr/include/php/20190902/main -I/usr/include/php/20190902/TSRM -I/usr/include/php/20190902/Zend -I/usr/include/php/20190902/ext -I/usr/include/php/20190902/ext/date/lib
 LFLAGS =
 LDFLAGS =
 SHARED_LIBTOOL =
@@ -191,9 +191,9 @@ prof-use:
 .PHONY: all clean install distclean test prof-gen prof-clean prof-use
 .NOEXPORT:
 tideways_xhprof.lo: /docker/php-xhprof-extension/tideways_xhprof.c
-	$(LIBTOOL) --mode=compile $(CC) -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1    -I. -I/docker/php-xhprof-extension $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /docker/php-xhprof-extension/tideways_xhprof.c -o tideways_xhprof.lo 
+	$(LIBTOOL) --mode=compile $(CC) -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1    -I. -I/docker/php-xhprof-extension $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /docker/php-xhprof-extension/tideways_xhprof.c -o tideways_xhprof.lo
 tracing.lo: /docker/php-xhprof-extension/tracing.c
-	$(LIBTOOL) --mode=compile $(CC) -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1    -I. -I/docker/php-xhprof-extension $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /docker/php-xhprof-extension/tracing.c -o tracing.lo 
+	$(LIBTOOL) --mode=compile $(CC) -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1    -I. -I/docker/php-xhprof-extension $(COMMON_FLAGS) $(CFLAGS_CLEAN) $(EXTRA_CFLAGS)  -c /docker/php-xhprof-extension/tracing.c -o tracing.lo
 $(phplibdir)/tideways_xhprof.la: ./tideways_xhprof.la
 	$(LIBTOOL) --mode=install cp ./tideways_xhprof.la $(phplibdir)
 

@@ -23,8 +23,8 @@ steps:
           queue: "build"
           arch: "x86_64"
 
-    - label: ":php: 7.2 amd64"
-      command: ./.buildkite/build_extension.sh 7.2
+    - label: ":php: 7.4 amd64"
+      command: ./.buildkite/build_extension.sh 7.4
       agents:
           phpbuild: "no-debug"
           queue: "build"
@@ -65,8 +65,8 @@ steps:
           queue: "build"
           arch: "x86_64"
 
-    - label: ":php: 7.2-zts amd64"
-      command: ./.buildkite/build_extension.sh 7.2-zts
+    - label: ":php: 7.4-zts amd64"
+      command: ./.buildkite/build_extension.sh 7.4-zts
       agents:
           phpbuild: "no-debug"
           queue: "build"

@@ -1,4 +1,4 @@
-FROM docker-registry.wikimedia.org/dev/buster-php72:1.0.0
+FROM docker-registry.wikimedia.org/dev/buster-php74:1.0.0
 
 RUN echo "deb http://apt.wikimedia.org/wikimedia buster-wikimedia component/vp9" > /etc/apt/sources.list.d/buster-vp9.list
 

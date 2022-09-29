@@ -14,11 +14,11 @@ This tool and script helps to create arm/(Mac M1 compatible) images for the deve
     version: '3.7'
     services:
       mediawiki:
-        image: docker-registry.wikimedia.org/dev/buster-php72-fpm:2.0.0-arm1
+        image: docker-registry.wikimedia.org/dev/buster-php74-fpm:2.0.0-arm1
       mediawiki-web:
         image: docker-registry.wikimedia.org/dev/buster-apache2:1.0.0-arm1
       mediawiki-jobrunner:
-        image: docker-registry.wikimedia.org/dev/buster-php72-jobrunner:1.0.0-arm1
+        image: docker-registry.wikimedia.org/dev/buster-php74-jobrunner:1.0.0-arm1
     ```
 
 - Shutdown the current containers:
