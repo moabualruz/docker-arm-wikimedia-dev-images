@@ -25,7 +25,22 @@ post_max_size=100M\n' | tee -a /etc/php/7.4/fpm/php.ini /etc/php/7.4/cli/php.ini
 
 RUN test -f "/etc/php/7.4/fpm/conf.d/20-xdebug.ini" && rm "/etc/php/7.4/fpm/conf.d/20-xdebug.ini" || true
 
-RUN ln -s /docker/20-xdebug.ini "/etc/php/7.4/fpm/conf.d/20-xdebug.ini"
+# install Xdebug and xhprof
+RUN wget http://pear.php.net/go-pear.phar && php go-pear.phar && rm go-pear.phar
+RUN pecl install xdebug-3.1.5
+
+## install xhprof (tideways forked xhprof and is maintaining it for PHP7+)
+RUN curl "https://github.com/tideways/php-xhprof-extension/archive/v5.0.4.tar.gz" -fsL -o ./a.tar.gz && \
+    tar xf ./a.tar.gz && \
+    ls -la && cd ./php-xhprof-extension-5.0.4 && \
+    ls -la && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && rm -rf ./a.tar.gz ./php-xhprof-extension-5.0.4
+
+RUN ln -s /docker/20-xdebug.ini "/etc/php/$PHP_VERSION/cli/conf.d/20-xdebug.ini"
 
 EXPOSE 9000
 EXPOSE 9003
