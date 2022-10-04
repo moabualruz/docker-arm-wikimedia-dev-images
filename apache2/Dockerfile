@@ -1,4 +1,4 @@
-FROM docker-registry.wikimedia.org/buster:latest
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 # We don't want the default index.html for running PHP applications, and
 # xdebug is a major performance drag, so disable it here (it's already

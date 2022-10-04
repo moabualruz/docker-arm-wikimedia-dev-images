@@ -1,8 +1,8 @@
-FROM docker-registry.wikimedia.org/dev/buster-php74:1.0.0
+FROM docker-registry.wikimedia.org/dev/bullseye-php74:1.0.0
 
 # We don't want the default index.html for running PHP applications, and
 # xdebug is a major performance drag, so disable it here (it's already
-# been disabled for CLI PHP in buster-php74).
+# been disabled for CLI PHP in bullseye-php74).
 
 RUN apt update && apt install -yq php7.4-fpm
 

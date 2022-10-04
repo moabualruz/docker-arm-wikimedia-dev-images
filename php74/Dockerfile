@@ -1,4 +1,4 @@
-FROM docker-registry.wikimedia.org/buster:latest
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 ENV PHP_VERSION=7.4
 
@@ -6,7 +6,7 @@ ENV PHP_VERSION=7.4
 # See: https://wikitech.wikimedia.org/wiki/APT_repository#Security
 
 # Does not have arm images using 3rd party instead
-#RUN echo "deb https://apt.wikimedia.org/wikimedia buster-wikimedia component/php74" \
+#RUN echo "deb https://apt.wikimedia.org/wikimedia bullseye-wikimedia component/php74" \
 #   > /etc/apt/sources.list.d/wikimedia-php74.list
 
 RUN apt update && apt install -yq curl \
@@ -57,6 +57,18 @@ RUN php -r "if (hash_file('sha384', 'composer-setup.php') === file_get_contents(
 
 RUN php composer-setup.php --install-dir=/usr/local/bin --filename=composer
 RUN php -r "unlink('composer-setup.php');"
+
+# Install PHP tools globally
+## Linters and Code Chekers
+RUN composer global require "friendsofphp/php-cs-fixer"
+RUN composer global require "squizlabs/php_codesniffer"
+
+## Extra tools
+### Static Code analyzers : finds bugs in PHP code
+RUN composer global require "phpstan/phpstan"
+RUN composer global require "phpmd/phpmd"
+RUN composer global require "vimeo/psalm"
+ENV PATH="/root/.composer/vendor/bin:$PATH"
 
 # Install XDebug but disable it by default due to its performance impact:
 
