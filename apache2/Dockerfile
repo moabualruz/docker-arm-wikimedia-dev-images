@@ -1,8 +1,8 @@
-FROM docker-registry.wikimedia.org/buster:latest
+FROM docker-registry.wikimedia.org/bullseye:latest
 
 # We don't want the default index.html for running PHP applications, and
 # xdebug is a major performance drag, so disable it here (it's already
-# been disabled for CLI PHP in stretch-php72).
+# been disabled for CLI PHP in stretch-php74).
 
 RUN apt update && apt install -yq apache2 \
     && rm /var/www/html/index.html \

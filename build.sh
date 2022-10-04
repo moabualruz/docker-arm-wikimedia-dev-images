@@ -1,17 +1,17 @@
 #!/bin/bash
 REGISTRY=docker-registry.wikimedia.org
-DISTRO=buster
+DISTRO=bullseye
 dateToday=$(date -u +%Y%m%d)
 img="${REGISTRY}/${DISTRO}"
 imgFull="${img}:${dateToday}"
 imgTag="${REGISTRY}/wikimedia-${DISTRO}"
-apache2Img="${REGISTRY}/dev/buster-apache2"
+apache2Img="${REGISTRY}/dev/bullseye-apache2"
 apache2Tag="1.0.0-arm1"
-phpImg="${REGISTRY}/dev/buster-php72"
+phpImg="${REGISTRY}/dev/bullseye-php74"
 phpTag="1.0.0"
-phpFpmImg="${REGISTRY}/dev/buster-php72-fpm"
+phpFpmImg="${REGISTRY}/dev/bullseye-php74-fpm"
 phpFpmTag="2.0.0-arm1"
-phpJobRunnerImg="${REGISTRY}/dev/buster-php72-jobrunner"
+phpJobRunnerImg="${REGISTRY}/dev/bullseye-php74-jobrunner"
 phpJobRunnerTag="1.0.0-arm1"
 ## Remove old images
 docker rmi "${imgFull}"
@@ -21,24 +21,24 @@ docker rmi "${apache2Img}:${apache2Tag}"
 docker rmi "${phpImg}:${phpTag}"
 docker rmi "${phpFpmImg}:${phpFpmTag}"
 docker rmi "${phpJobRunnerImg}:${phpJobRunnerTag}"
-## Building Core Buster image
-echo "Building Core Buster image"
-docker build . -f buster/Dockerfile -t "${imgFull}"
-## Tagging Core Buster image
-echo "Tagging Core Buster image"
+## Building Core bullseye image
+echo "Building Core bullseye image ${imgFull}"
+docker build . -f bullseye/Dockerfile -t "${imgFull}"
+## Tagging Core bullseye image
+echo "Tagging Core bullseye image ${img}:latest and ${imgTag}:latest"
 docker tag "${imgFull}" "${img}:latest"
 docker tag "${imgFull}" "${imgTag}:latest"
-## Building Apache2 Buster image
-echo "Building Apache2 Buster image"
+## Building Apache2 bullseye image
+echo "Building Apache2 bullseye image ${apache2Img}:${apache2Tag}"
 docker build . -f apache2/Dockerfile -t "${apache2Img}:${apache2Tag}"
-## Building PHP7.2 Buster image
-echo "Building PHP7.2 Buster image"
-docker build . -f php72/Dockerfile -t "${phpImg}:${phpTag}"
-## Building PHP7.2 FPM Buster image
-echo "Building PHP7.2 FPM Buster image"
+## Building php7.4 bullseye image
+echo "Building php7.4 bullseye image ${phpImg}:${phpTag}"
+docker build . -f php74/Dockerfile -t "${phpImg}:${phpTag}"
+## Building php7.4 FPM bullseye image
+echo "Building php7.4 FPM bullseye image ${phpFpmImg}:${phpFpmTag}"
 docker build . -f fpm/Dockerfile -t "${phpFpmImg}:${phpFpmTag}"
-## Building PHP7.2 Job Runner Buster image
-echo "Building PHP7.2 Job Runner Buster image"
+## Building php7.4 Job Runner bullseye image
+echo "Building php7.4 Job Runner bullseye image ${phpJobRunnerImg}:${phpJobRunnerTag}"
 docker build . -f jobrunner/Dockerfile -t "${phpJobRunnerImg}:${phpJobRunnerTag}"
 
 ## Remove unused images

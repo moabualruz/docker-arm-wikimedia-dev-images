@@ -23,7 +23,7 @@ environment:
       ZTS_STATE: enable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PHP_BUILD_CRT: vc15
-    - PHP_REL: 7.2
+    - PHP_REL: 7.4
       ARCHITECTURE: x64
       ZTS_STATE: enable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -43,7 +43,7 @@ environment:
       ZTS_STATE: disable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PHP_BUILD_CRT: vc15
-    - PHP_REL: 7.2
+    - PHP_REL: 7.4
       ARCHITECTURE: x64
       ZTS_STATE: disable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -63,7 +63,7 @@ environment:
       ZTS_STATE: enable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PHP_BUILD_CRT: vc15
-    - PHP_REL: 7.2
+    - PHP_REL: 7.4
       ARCHITECTURE: x86
       ZTS_STATE: enable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
@@ -83,7 +83,7 @@ environment:
       ZTS_STATE: disable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
       PHP_BUILD_CRT: vc15
-    - PHP_REL: 7.2
+    - PHP_REL: 7.4
       ARCHITECTURE: x86
       ZTS_STATE: disable
       APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
