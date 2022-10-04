@@ -72,6 +72,28 @@ ENV PATH="/root/.composer/vendor/bin:$PATH"
 
 # Install XDebug but disable it by default due to its performance impact:
 
-RUN ln -s /bin/sed /usr/bin/sed
+RUN test -f /bin/sed && ln -s /bin/sed /usr/bin/sed
+RUN test -f /usr/bin/sed && ln -s /usr/bin/sed /bin/sed
 
-RUN sh /docker/build-xdebug.sh
+RUN pecl install xdebug-3.1.5 && docker-php-ext-enable xdebug
+
+RUN printf 'zend_extension=xdebug.so \
+xdebug.mode="${XDEBUG_MODE}" \
+extension=tideways_xhprof.so \
+' | tee -a /docker/20-xdebug.ini
+
+RUN ln -s /docker/20-xdebug.ini "/etc/php/$PHP_VERSION/cli/conf.d/20-xdebug.ini"
+
+# install xhprof (tideways forked xhprof and is maintaining it for PHP7+)
+RUN curl "https://github.com/tideways/php-xhprof-extension/archive/v5.0.4.tar.gz" -fsL -o ./a.tar.gz && \
+    tar xf ./a.tar.gz && \
+    ls -la && cd ./php-xhprof-extension-5.0.4 && \
+    ls -la && \
+    phpize && \
+    ./configure && \
+    make && \
+    make install && \
+    cd .. && rm -rf ./a.tar.gz ./php-xhprof-extension-5.0.4 && \
+    docker-php-ext-enable tideways_xhprof
+
+
