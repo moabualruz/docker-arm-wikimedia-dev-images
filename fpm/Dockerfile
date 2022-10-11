@@ -8,7 +8,6 @@ RUN apt update && apt install -yq php7.4-fpm
 
 # php-fpm configuration:
 COPY ../files/mediawiki-fpm/docker/20-xdebug.ini /docker/20-xdebug.ini
-COPY ../files/mediawiki-fpm/docker/php-xhprof-extension/ /docker/php-xhprof-extension/
 COPY ../files/mediawiki-fpm/php-fpm.conf /etc/php/7.4/fpm/php-fpm.conf
 RUN cp /docker/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
@@ -40,6 +39,7 @@ RUN curl "https://github.com/tideways/php-xhprof-extension/archive/v5.0.4.tar.gz
     make install && \
     cd .. && rm -rf ./a.tar.gz ./php-xhprof-extension-5.0.4
 
+RUN ln -s /docker/20-xdebug.ini "/etc/php/$PHP_VERSION/fpm/conf.d/20-xdebug.ini"
 RUN ln -s /docker/20-xdebug.ini "/etc/php/$PHP_VERSION/cli/conf.d/20-xdebug.ini"
 
 EXPOSE 9000
