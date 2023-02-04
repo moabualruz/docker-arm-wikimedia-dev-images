@@ -1,13 +1,13 @@
 FROM docker-registry.wikimedia.org/bullseye:latest
 
-ENV PHP_VERSION=7.4
+ENV PHP_VERSION=8.1
 
 # Note that WMF APT key is pre-installed.
 # See: https://wikitech.wikimedia.org/wiki/APT_repository#Security
 
 # Does not have arm images using 3rd party instead
-#RUN echo "deb https://apt.wikimedia.org/wikimedia bullseye-wikimedia component/php74" \
-#   > /etc/apt/sources.list.d/wikimedia-php74.list
+#RUN echo "deb https://apt.wikimedia.org/wikimedia bullseye-wikimedia component/php81" \
+#   > /etc/apt/sources.list.d/wikimedia-php81.list
 
 RUN apt update && apt install -yq curl \
 wget \
@@ -18,37 +18,37 @@ apt-transport-https
 
 
 RUN curl -s https://packages.sury.org/php/apt.gpg --output apt.gpg && APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE=1 apt-key add apt.gpg && rm apt.gpg
-RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php7.list
+RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php8.list
 
 # Install PHP dependencies:
-RUN apt update && apt install -yq php7.4 \
-php7.4-cli \
-php7.4-common \
-php7.4-apcu \
-php7.4-bcmath \
-php7.4-cli \
-php7.4-curl \
-php7.4-dba \
-php7.4-gd \
-php7.4-gmp \
-php7.4-intl \
-php7.4-ldap \
-php7.4-mbstring \
-php7.4-mysql \
-php7.4-pgsql \
-php7.4-sqlite3 \
-php7.4-xml \
-php7.4-zip \
-php7.4-redis \
-php7.4-dev \
-php7.4-ldap \
-php7.4-mysql \
-php7.4-pgsql \
-php7.4-dev \
+RUN apt update && apt install -yq php8.1 \
+php8.1-cli \
+php8.1-common \
+php8.1-apcu \
+php8.1-bcmath \
+php8.1-cli \
+php8.1-curl \
+php8.1-dba \
+php8.1-gd \
+php8.1-gmp \
+php8.1-intl \
+php8.1-ldap \
+php8.1-mbstring \
+php8.1-mysql \
+php8.1-pgsql \
+php8.1-sqlite3 \
+php8.1-xml \
+php8.1-zip \
+php8.1-redis \
+php8.1-dev \
+php8.1-ldap \
+php8.1-mysql \
+php8.1-pgsql \
+php8.1-dev \
 sed \
 build-essential
 
-RUN update-alternatives --set php /usr/bin/php7.4
+RUN update-alternatives --set php /usr/bin/php8.1
 
 # install composer
 # see "command-line installation" https://getcomposer.org/download/

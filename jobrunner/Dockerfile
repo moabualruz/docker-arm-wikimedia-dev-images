@@ -1,4 +1,4 @@
-FROM docker-registry.wikimedia.org/dev/bullseye-php74:1.0.0
+FROM docker-registry.wikimedia.org/dev/bullseye-php81:1.0.0
 
 RUN echo "deb http://apt.wikimedia.org/wikimedia bullseye-wikimedia component/vp9" > /etc/apt/sources.list.d/bullseye-vp9.list
 
