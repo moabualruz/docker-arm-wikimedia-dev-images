@@ -2,7 +2,7 @@ FROM docker-registry.wikimedia.org/dev/bullseye-php81:1.0.0
 
 RUN echo "deb http://apt.wikimedia.org/wikimedia bullseye-wikimedia component/vp9" > /etc/apt/sources.list.d/bullseye-vp9.list
 
-RUN apt update && apt install -yq ffmpeg
+RUN apt-get update && apt-get install -yq ffmpeg
 
 # MediaWiki default settings
 COPY ../files/mediawiki-jobrunner/docker/PlatformSettings.php /docker/PlatformSettings.php

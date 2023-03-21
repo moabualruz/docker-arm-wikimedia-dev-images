@@ -4,7 +4,7 @@ FROM docker-registry.wikimedia.org/dev/bullseye-php81:1.0.0
 # xdebug is a major performance drag, so disable it here (it's already
 # been disabled for CLI PHP in bullseye-php81).
 
-RUN apt update && apt install -yq php8.1-fpm
+RUN apt-get update && apt-get install -yq php8.1-fpm
 
 # php-fpm configuration:
 COPY ../files/mediawiki-fpm/docker/20-xdebug.ini /docker/20-xdebug.ini

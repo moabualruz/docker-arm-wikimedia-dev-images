@@ -9,7 +9,7 @@ ENV PHP_VERSION=8.1
 #RUN echo "deb https://apt.wikimedia.org/wikimedia bullseye-wikimedia component/php81" \
 #   > /etc/apt/sources.list.d/wikimedia-php81.list
 
-RUN apt update && apt install -yq curl \
+RUN apt-get update && apt-get install -yq curl \
 wget \
 gnupg2 \
 ca-certificates \
@@ -21,7 +21,7 @@ RUN curl -s https://packages.sury.org/php/apt.gpg --output apt.gpg && APT_KEY_DO
 RUN echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" | tee /etc/apt/sources.list.d/php8.list
 
 # Install PHP dependencies:
-RUN apt update && apt install -yq php8.1 \
+RUN apt-get update && apt-get install -yq php8.1 \
 php8.1-cli \
 php8.1-common \
 php8.1-apcu \

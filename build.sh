@@ -1,4 +1,6 @@
 #!/bin/bash
+export DOCKER_BUILDKIT=0
+export COMPOSE_DOCKER_CLI_BUILD=0
 REGISTRY=docker-registry.wikimedia.org
 DISTRO=bullseye
 dateToday=$(date -u +%Y%m%d)
