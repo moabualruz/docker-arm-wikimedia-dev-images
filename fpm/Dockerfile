@@ -6,6 +6,10 @@ FROM docker-registry.wikimedia.org/dev/bullseye-php81:1.0.0
 
 RUN apt-get update && apt-get install -yq php8.1-fpm
 
+RUN echo 'extension=wikidiff2.so' > /etc/php/8.1/mods-available/wikidiff2.ini
+RUN ln -s /etc/php/8.1/mods-available/wikidiff2.ini /etc/php/8.1/fpm/conf.d/wikidiff2.ini
+RUN phpenmod wikidiff2
+
 # php-fpm configuration:
 COPY ../files/mediawiki-fpm/docker/20-xdebug.ini /docker/20-xdebug.ini
 COPY ../files/mediawiki-fpm/php-fpm.conf /etc/php/8.1/fpm/php-fpm.conf

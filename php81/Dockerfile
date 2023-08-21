@@ -46,7 +46,22 @@ php8.1-mysql \
 php8.1-pgsql \
 php8.1-dev \
 sed \
-build-essential
+git \
+build-essential \
+pkg-config \
+libthai0 \
+libthai-dev
+
+RUN git clone https://gerrit.wikimedia.org/r/mediawiki/php/wikidiff2.git
+WORKDIR wikidiff2
+RUN phpize
+RUN ./configure && make && make install
+
+RUN echo 'extension=wikidiff2.so' > /etc/php/8.1/mods-available/wikidiff2.ini
+RUN ln -s /etc/php/8.1/mods-available/wikidiff2.ini /etc/php/8.1/apache2/conf.d/wikidiff2.ini
+RUN ln -s /etc/php/8.1/mods-available/wikidiff2.ini /etc/php/8.1/cli/conf.d/wikidiff2.ini
+#RUN ln -s /etc/php/8.1/mods-available/wikidiff2.ini /etc/php/8.1/fpm/conf.d/wikidiff2.ini
+RUN phpenmod wikidiff2
 
 RUN update-alternatives --set php /usr/bin/php8.1
 
