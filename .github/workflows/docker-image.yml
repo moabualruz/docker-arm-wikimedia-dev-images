@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+env:
+  REGISTRY: "docker-registry.wikimedia.org"
+  DISTRO: "bullseye"
+  dateToday: $(date -u +%Y%m%d)
+  img: "${REGISTRY}/${DISTRO}"
+  imgFull: "${img}:${dateToday}"
+  imgTag: "${REGISTRY}/wikimedia-${DISTRO}"
+  apache2Img: "${REGISTRY}/dev/bullseye-apache2"
+  apache2Tag: "1.0.0-arm1"
+  phpImg: "${REGISTRY}/dev/bullseye-php81"
+  phpTag: "1.0.0"
+  phpFpmImg: "${REGISTRY}/dev/bullseye-php81-fpm"
+  phpFpmTag: "2.0.0-arm1"
+  phpJobRunnerImg: "${REGISTRY}/dev/bullseye-php81-jobrunner"
+  phpJobRunnerTag: "1.0.0-arm1"
+  
+jobs:
+  build:
+    runs-on: macos-13
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: docker build . -f bullseye/Dockerfile -t "${imgFull}"
